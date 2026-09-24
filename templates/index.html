@@ -23,8 +23,11 @@
                 <option value="mp4">MP4</option>
                 <option value="wav">WAV</option>
             </select><br>
-            <button type="submit">Convert Now</button>
-        </form>
-    </div>
-</body>
-</html>
+           <div style="margin-top: 10px; text-align: left;">
+        <label>തുടങ്ങേണ്ട സമയം (Start Time):</label><br>
+        <input type="number" name="start_time" value="0" min="0" style="width: 100%; padding: 5px; margin-top: 3px; margin-bottom: 5px;"><br>
+        
+        <label>അവസാനിക്കേണ്ട സമയം (End Time):</label><br>
+        <input type="number" name="end_time" value="10" min="1" style="width: 100%; padding: 5px; margin-top: 3px;">
+  <button type="submit">Convert Now</button>
+</form>
