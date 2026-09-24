@@ -1,11 +1,18 @@
-from fastapi import FastAPI, Request, Response, UploadFile, File
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+mport os
 import shutil
-import os
+import subprocess
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException, Request, Response
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI(title="Web Media Converter")
 templates = Jinja2Templates(directory="templates")
+
+UPLOAD_FOLDER = "uploads"
+OUTPUT_FOLDER = "outputs"
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
@@ -14,11 +21,6 @@ async def home(request: Request):
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     return Response(status_code=204)
-
-@app.post("/upload/")
-async def upload_file(file: UploadFile = File(...)):
-    # നിങ്ങളുടെ മറ്റ് അപ്‌ലോഡ് കോഡുകൾ ഇവിടെ നൽകുക
-    pass
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...), convert_to: str = "mp3"):
     try:
@@ -49,7 +51,6 @@ from fastapi.templating import Jinja2Templates
 
 app = FastAPI(title="Web Media Converter")
 templates = Jinja2Templates(directory="templates")
-
 UPLOAD_FOLDER = "uploads"
 OUTPUT_FOLDER = "outputs"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
